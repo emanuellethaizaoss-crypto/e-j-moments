@@ -1,0 +1,27 @@
+name: Materialize wedding frame
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  frame:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Materialize exact wedding frame
+        if: ${{ hashFiles('moldura-casamento.webp') == '' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curl -L -sS             -H "Accept: application/vnd.github+json"             -H "Authorization: Bearer $GH_TOKEN"             "https://api.github.com/repos/${{ github.repository }}/git/blobs/4c0a69b6011b99020f06d12779e272b1d31320ec"             | jq -r '.content' | tr -d '\n' | base64 -d > moldura-casamento.webp
+          test -s moldura-casamento.webp
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add moldura-casamento.webp
+          git commit -m "Adiciona moldura floral exata"
+          git push

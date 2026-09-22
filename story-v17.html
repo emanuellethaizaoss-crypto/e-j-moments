@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"/>
+<meta name="theme-color" content="#1b1022"/>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+<title>E&J Moments</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Arial,sans-serif;background:#160f1e;color:#fff}
+body{min-height:100dvh}
+.app{min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px}
+.intro{width:min(100%,430px);text-align:center;margin-bottom:10px}
+.intro h1{font:400 21px Georgia,serif;margin:0 0 4px}
+.intro p{font:italic 16px Georgia,serif;margin:0;opacity:.92}
+.story{
+  position:relative;
+  width:min(100%,430px);
+  aspect-ratio:9/16;
+  border-radius:24px;
+  overflow:hidden;
+  background:#09060d;
+}
+.photo{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  background:#000;
+}
+.framePng{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:fill;
+  z-index:5;
+  pointer-events:none;
+}
+.placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:58px;background:radial-gradient(circle at 50% 35%,#4d365f,#120b19 72%)}
+.placeholder span{font-size:14px;line-height:1.55;color:#ffffffc0}
+.controls{width:min(100%,430px);padding:14px 2px 0;display:flex;flex-direction:column;gap:10px}
+.row{display:flex;gap:10px}
+.btn,.fileLabel{border:0;border-radius:999px;padding:14px 18px;font-size:14px;font-weight:700;letter-spacing:.03em;cursor:pointer;text-align:center;width:100%;display:block}
+.primary{background:linear-gradient(135deg,#b892d6,#6d4a86);color:#fff}
+.secondary{background:#fff;color:#4d3766}
+.ghost{background:#ffffff14;color:#fff;border:1px solid #ffffff2b}
+.panel{width:min(100%,430px);background:#fff;color:#33273d;padding:20px;border-radius:22px}
+input[type=text],input[type=password]{width:100%;padding:13px 15px;border:1px solid #ddcfea;border-radius:14px;font-size:16px}
+label{font-size:13px;line-height:1.4}
+.hidden{display:none!important}.status{text-align:center;font-size:13px;min-height:18px}.success{color:#baf0c7}
+.adminCard{width:min(100%,900px);background:#fff;color:#2f2538;padding:20px;border-radius:22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}.tile img{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:12px}.tile{font-size:12px}a{color:#6c4a90}
+.version{position:fixed;right:8px;bottom:6px;font-size:9px;color:#ffffff2a}
+</style>
+</head>
+<body>
+<div id="guest" class="app">
+  <div class="intro">
+    <h1>Emanuelle Thaíza & João Vitor</h1>
+    <p>Eternize o nosso grande dia através do seu olhar ♡</p>
+  </div>
+
+  <div class="story">
+    <div id="placeholder" class="placeholder"></div>
+    <img id="photoPreview" class="photo hidden" alt="Prévia"/>
+
+    <img
+  id="frameOverlay"
+  class="framePng"
+  src="moldura-casamento.png"
+  alt="Moldura do casamento"
+/>
+  </div>
+
+  <div id="cameraControls" class="controls">
+    <label class="fileLabel primary" for="cameraInput">Abrir câmera do celular</label>
+    <label class="fileLabel ghost" for="galleryInput">Escolher foto da galeria</label>
+    <div class="status">A câmera do celular preserva a qualidade; o site aplica a moldura depois.</div>
+  </div>
+
+  <div id="previewControls" class="controls hidden">
+    <div class="panel">
+      <input id="guestName" type="text" maxlength="80" placeholder="Seu nome (opcional)"/>
+      <div style="height:10px"></div>
+      <label><input id="consent" type="checkbox"/> Concordo em enviar esta foto aos noivos. Ela não ficará visível para outros convidados.</label>
+    </div>
+    <div class="row"><button id="retake" class="btn secondary">Refazer foto</button><button id="send" class="btn primary">Enviar aos noivos</button></div>
+    <div id="sendStatus" class="status"></div>
+  </div>
+
+  <div id="doneControls" class="controls hidden">
+    <button id="save" class="btn primary">Salvar no meu celular</button>
+    <button id="newPhoto" class="btn secondary">Tirar outra foto</button>
+    <div class="status success">Foto enviada com sucesso ♡</div>
+  </div>
+
+  <input id="cameraInput" type="file" accept="image/*" capture="environment" class="hidden"/>
+  <input id="galleryInput" type="file" accept="image/*" class="hidden"/>
+</div>
+
+<div id="admin" class="app hidden">
+  <div class="adminCard">
+    <h2 style="font-family:Georgia,serif;margin-top:0">Galeria dos noivos</h2>
+    <div id="loginBox">
+      <input id="adminPass" type="password" placeholder="Senha do painel"/>
+      <div style="height:10px"></div>
+      <button id="adminLogin" class="btn primary" style="width:100%">Entrar</button>
+      <div id="adminStatus" class="status" style="color:#6d4b88"></div>
+    </div>
+    <div id="galleryBox" class="hidden">
+      <div class="row" style="margin-bottom:14px"><button id="refresh" class="btn secondary">Atualizar</button><button id="downloadAll" class="btn primary">Baixar todas</button></div>
+      <div id="gallery" class="grid"></div>
+    </div>
+  </div>
+</div>
+
+<canvas id="canvas" width="1080" height="1920" class="hidden"></canvas>
+<div class="version">v17-clean-placeholder</div>
+
+<script>
+const endpoint='https://gxsqgezfiuxxhpeaepem.supabase.co/functions/v1/wedding-app';
+const guest=document.getElementById('guest'),admin=document.getElementById('admin');
+if(new URLSearchParams(location.search).has('admin')){guest.classList.add('hidden');admin.classList.remove('hidden')}
+
+const preview=document.getElementById('photoPreview'),placeholder=document.getElementById('placeholder'),frameOverlay=document.getElementById('frameOverlay');
+const canvas=document.getElementById('canvas'),ctx=canvas.getContext('2d');
+const cameraControls=document.getElementById('cameraControls'),previewControls=document.getElementById('previewControls'),doneControls=document.getElementById('doneControls'),sendStatus=document.getElementById('sendStatus');
+let finalData=null;
+
+function drawPhoto9x16(img){
+  const W=1080,H=1920,sw=img.naturalWidth||img.width,sh=img.naturalHeight||img.height;
+  if(!sw||!sh)throw new Error('Imagem sem dimensões');
+  ctx.clearRect(0,0,W,H);ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
+  const scale=Math.max(W/sw,H/sh),dw=sw*scale,dh=sh*scale;
+  ctx.drawImage(img,(W-dw)/2,(H-dh)/2,dw,dh);
+}
+const FRAME_SRC = 'moldura-casamento.png';
+
+function loadImage(src){
+  return new Promise((resolve,reject)=>{
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
+}
+async function processFile(file){
+  if(!file) return;
+
+  const photoUrl = URL.createObjectURL(file);
+
+  try {
+    const [photo, frame] = await Promise.all([
+      loadImage(photoUrl),
+      loadImage(FRAME_SRC)
+    ]);
+
+    // Primeiro coloca a foto exatamente no canvas 9:16
+    drawPhoto9x16(photo);
+
+    // Depois aplica EXATAMENTE a PNG escolhida
+    ctx.drawImage(frame, 0, 0, 1080, 1920);
+
+    // Cria a foto final pronta para Story
+    finalData = canvas.toDataURL('image/jpeg', 0.97);
+
+    preview.src = finalData;
+    preview.classList.remove('hidden');
+
+    placeholder.classList.add('hidden');
+
+    // A moldura já está incorporada na foto.
+    // Escondemos a camada HTML para não duplicar.
+    frameOverlay.classList.add('hidden');
+
+    cameraControls.classList.add('hidden');
+    previewControls.classList.remove('hidden');
+
+  } catch(error) {
+    console.error(error);
+
+    alert(
+      'Não foi possível aplicar a moldura. Confira se moldura-casamento.png está no repositório.'
+    );
+
+  } finally {
+    URL.revokeObjectURL(photoUrl);
+  }
+}
+
+const cameraInput=document.getElementById('cameraInput');
+const galleryInput=document.getElementById('galleryInput');
+const consent=document.getElementById('consent');
+const retake=document.getElementById('retake');
+const newPhoto=document.getElementById('newPhoto');
+const send=document.getElementById('send');
+const save=document.getElementById('save');
+const guestName=document.getElementById('guestName');
+
+cameraInput.onchange=e=>{processFile(e.target.files?.[0]);e.target.value=''};
+galleryInput.onchange=e=>{processFile(e.target.files?.[0]);e.target.value=''};
+
+function reset(){
+  preview.classList.add('hidden');
+  preview.removeAttribute('src');
+
+  placeholder.classList.remove('hidden');
+  frameOverlay.classList.remove('hidden');
+
+  previewControls.classList.add('hidden');
+  doneControls.classList.add('hidden');
+  cameraControls.classList.remove('hidden');
+
+  finalData = null;
+  consent.checked = false;
+  sendStatus.textContent = '';
+};
+retake.onclick=reset;newPhoto.onclick=reset;
+
+send.onclick=async()=>{
+  if(!finalData)return;
+  if(!consent.checked){sendStatus.textContent='Marque o consentimento antes de enviar.';return}
+  send.disabled=true;sendStatus.textContent='Enviando…';
+  try{
+    const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'upload',image:finalData,guest_name:guestName.value.trim()})});
+    const j=await r.json();if(!r.ok)throw new Error(j.error||'Falha no envio');
+    previewControls.classList.add('hidden');doneControls.classList.remove('hidden');
+  }catch(e){sendStatus.textContent='Não foi possível enviar. Tente novamente.'}
+  finally{send.disabled=false}
+};
+save.onclick=()=>{if(!finalData)return;const a=document.createElement('a');a.href=finalData;a.download='EJ-Story-10-10-2026.jpg';document.body.appendChild(a);a.click();a.remove()};
+
+async function adminList(){
+  const pass=adminPass.value,st=adminStatus;st.textContent='Carregando…';
+  const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'admin-list',password:pass})});
+  const j=await r.json();if(!r.ok){st.textContent='Senha incorreta.';return}
+  st.textContent='';loginBox.classList.add('hidden');galleryBox.classList.remove('hidden');gallery.innerHTML='';window.__photos=j.photos||[];
+  for(const p of window.__photos){const d=document.createElement('div');d.className='tile';d.innerHTML='<a href="'+p.url+'" target="_blank"><img src="'+p.url+'"></a><div><b>'+(p.guest_name||'Convidado(a)')+'</b></div><div>'+new Date(p.created_at).toLocaleString('pt-BR')+'</div><a href="'+p.url+'" download>Baixar</a>';gallery.appendChild(d)}
+}
+adminLogin.onclick=adminList;refresh.onclick=adminList;
+downloadAll.onclick=async()=>{for(const p of(window.__photos||[])){const a=document.createElement('a');a.href=p.url;a.download='foto-casamento.jpg';document.body.appendChild(a);a.click();a.remove();await new Promise(r=>setTimeout(r,350))}};
+</script>
+</body>
+</html>

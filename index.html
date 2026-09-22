@@ -14,9 +14,32 @@ body{min-height:100dvh}
 .intro{width:min(100%,430px);text-align:center;margin-bottom:10px}
 .intro h1{font:400 21px Georgia,serif;margin:0 0 4px}
 .intro p{font:italic 16px Georgia,serif;margin:0;opacity:.92}
-.story{position:relative;width:min(100%,430px);aspect-ratio:9/16;border-radius:24px;overflow:hidden;background:#09060d;box-shadow:0 20px 60px #0008}
-.photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#000}
-.frameSvg{position:absolute;inset:0;width:100%;height:100%;z-index:5;pointer-events:none}
+.story{
+  position:relative;
+  width:min(100%,430px);
+  aspect-ratio:9/16;
+  border-radius:24px;
+  overflow:hidden;
+  background:#09060d;
+}
+.photo{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  background:#000;
+}
+.framePng{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:fill;
+  z-index:5;
+  pointer-events:none;
+}
 .placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:58px;background:radial-gradient(circle at 50% 35%,#4d365f,#120b19 72%)}
 .placeholder span{font-size:14px;line-height:1.55;color:#ffffffc0}
 .controls{width:min(100%,430px);padding:14px 2px 0;display:flex;flex-direction:column;gap:10px}
@@ -47,118 +70,12 @@ label{font-size:13px;line-height:1.4}
     </div>
     <img id="photoPreview" class="photo hidden" alt="Prévia"/>
 
-    <svg id="frameSvg" class="frameSvg" viewBox="0 0 1080 1920" preserveAspectRatio="none">
-      <defs>
-        <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#efe2f7"/>
-          <stop offset=".35" stop-color="#c7a1df"/>
-          <stop offset=".72" stop-color="#8d63a9"/>
-          <stop offset="1" stop-color="#583865"/>
-        </linearGradient>
-        <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#7c786d"/>
-          <stop offset="1" stop-color="#43463d"/>
-        </linearGradient>
-        <filter id="s"><feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#000" flood-opacity=".38"/></filter>
-      </defs>
-
-      <!-- dense top-left composition inspired by the selected frame -->
-      <g filter="url(#s)">
-        <g stroke="#6f5579" stroke-width="8" fill="none" stroke-linecap="round">
-          <path d="M15 490 C90 345 165 185 210 5"/>
-          <path d="M55 420 C155 300 270 180 395 35"/>
-          <path d="M5 330 C70 235 120 125 145 10"/>
-          <path d="M120 510 C245 370 350 275 485 125"/>
-        </g>
-        <g fill="url(#leaf)" opacity=".96">
-          <ellipse cx="65" cy="370" rx="28" ry="66" transform="rotate(-28 65 370)"/>
-          <ellipse cx="120" cy="305" rx="26" ry="62" transform="rotate(22 120 305)"/>
-          <ellipse cx="175" cy="240" rx="25" ry="59" transform="rotate(-20 175 240)"/>
-          <ellipse cx="235" cy="190" rx="27" ry="63" transform="rotate(28 235 190)"/>
-          <ellipse cx="310" cy="135" rx="25" ry="60" transform="rotate(-22 310 135)"/>
-          <ellipse cx="390" cy="90" rx="23" ry="55" transform="rotate(18 390 90)"/>
-        </g>
-        <g fill="url(#purple)">
-          <ellipse cx="34" cy="430" rx="18" ry="44" transform="rotate(-25 34 430)"/>
-          <ellipse cx="58" cy="382" rx="19" ry="46" transform="rotate(-20 58 382)"/>
-          <ellipse cx="82" cy="330" rx="20" ry="47" transform="rotate(-15 82 330)"/>
-          <ellipse cx="112" cy="276" rx="19" ry="45" transform="rotate(15 112 276)"/>
-          <ellipse cx="150" cy="235" rx="20" ry="48" transform="rotate(22 150 235)"/>
-          <ellipse cx="196" cy="195" rx="18" ry="43" transform="rotate(-18 196 195)"/>
-          <ellipse cx="245" cy="160" rx="19" ry="46" transform="rotate(18 245 160)"/>
-          <ellipse cx="302" cy="120" rx="18" ry="43" transform="rotate(-15 302 120)"/>
-          <ellipse cx="365" cy="88" rx="17" ry="40" transform="rotate(19 365 88)"/>
-          <ellipse cx="420" cy="70" rx="16" ry="38" transform="rotate(-16 420 70)"/>
-          <ellipse cx="105" cy="420" rx="18" ry="43" transform="rotate(12 105 420)"/>
-          <ellipse cx="155" cy="375" rx="18" ry="42" transform="rotate(-10 155 375)"/>
-        </g>
-
-        <g transform="translate(145 138)" fill="#fff">
-          <ellipse cx="0" cy="-42" rx="44" ry="64"/><ellipse cx="0" cy="42" rx="44" ry="64"/>
-          <ellipse cx="-47" cy="0" rx="63" ry="40"/><ellipse cx="47" cy="0" rx="63" ry="40"/>
-          <circle cx="0" cy="0" r="20" fill="#e0b06e"/>
-        </g>
-        <g transform="translate(72 218) scale(.74)" fill="#fff">
-          <ellipse cx="0" cy="-42" rx="44" ry="64"/><ellipse cx="0" cy="42" rx="44" ry="64"/>
-          <ellipse cx="-47" cy="0" rx="63" ry="40"/><ellipse cx="47" cy="0" rx="63" ry="40"/>
-          <circle cx="0" cy="0" r="20" fill="#e0b06e"/>
-        </g>
-      </g>
-
-      <!-- top-right monogram -->
-      <g fill="#421137" filter="url(#s)">
-        <text x="880" y="175" text-anchor="middle" font-family="Georgia,serif" font-size="104">E | J</text>
-        <path d="M820 228 C855 190 890 212 867 245 C851 263 836 277 820 298 C803 278 789 265 778 247 C755 212 790 190 820 228Z" fill="#5d1a4c"/>
-        <path d="M830 295 C905 270 940 278 1002 306" fill="none" stroke="#5d1a4c" stroke-width="7" stroke-linecap="round"/>
-      </g>
-
-      <!-- bottom-right dense cluster -->
-      <g transform="translate(1080 1920) rotate(180)" filter="url(#s)">
-        <g stroke="#6f5579" stroke-width="8" fill="none" stroke-linecap="round">
-          <path d="M15 500 C90 350 170 195 220 5"/>
-          <path d="M60 445 C160 315 280 190 410 35"/>
-          <path d="M125 525 C250 380 365 280 500 130"/>
-        </g>
-        <g fill="url(#leaf)">
-          <ellipse cx="70" cy="380" rx="28" ry="66" transform="rotate(-28 70 380)"/>
-          <ellipse cx="125" cy="315" rx="26" ry="62" transform="rotate(22 125 315)"/>
-          <ellipse cx="185" cy="250" rx="25" ry="59" transform="rotate(-20 185 250)"/>
-          <ellipse cx="245" cy="195" rx="27" ry="63" transform="rotate(28 245 195)"/>
-          <ellipse cx="320" cy="140" rx="25" ry="60" transform="rotate(-22 320 140)"/>
-          <ellipse cx="400" cy="92" rx="23" ry="55" transform="rotate(18 400 92)"/>
-        </g>
-        <g fill="url(#purple)">
-          <ellipse cx="35" cy="440" rx="18" ry="44" transform="rotate(-25 35 440)"/>
-          <ellipse cx="60" cy="390" rx="19" ry="46" transform="rotate(-20 60 390)"/>
-          <ellipse cx="88" cy="338" rx="20" ry="47" transform="rotate(-15 88 338)"/>
-          <ellipse cx="118" cy="285" rx="19" ry="45" transform="rotate(15 118 285)"/>
-          <ellipse cx="158" cy="242" rx="20" ry="48" transform="rotate(22 158 242)"/>
-          <ellipse cx="205" cy="200" rx="18" ry="43" transform="rotate(-18 205 200)"/>
-          <ellipse cx="255" cy="162" rx="19" ry="46" transform="rotate(18 255 162)"/>
-          <ellipse cx="315" cy="122" rx="18" ry="43" transform="rotate(-15 315 122)"/>
-          <ellipse cx="380" cy="88" rx="17" ry="40" transform="rotate(19 380 88)"/>
-          <ellipse cx="438" cy="68" rx="16" ry="38" transform="rotate(-16 438 68)"/>
-        </g>
-        <g transform="translate(150 150)" fill="#fff">
-          <ellipse cx="0" cy="-42" rx="44" ry="64"/><ellipse cx="0" cy="42" rx="44" ry="64"/>
-          <ellipse cx="-47" cy="0" rx="63" ry="40"/><ellipse cx="47" cy="0" rx="63" ry="40"/>
-          <circle cx="0" cy="0" r="20" fill="#e0b06e"/>
-        </g>
-        <g transform="translate(240 110) scale(.72)" fill="#fff">
-          <ellipse cx="0" cy="-42" rx="44" ry="64"/><ellipse cx="0" cy="42" rx="44" ry="64"/>
-          <ellipse cx="-47" cy="0" rx="63" ry="40"/><ellipse cx="47" cy="0" rx="63" ry="40"/>
-          <circle cx="0" cy="0" r="20" fill="#e0b06e"/>
-        </g>
-      </g>
-
-      <!-- identity lower-left / center as in the preferred composition -->
-      <g fill="#421137" text-anchor="middle" filter="url(#s)">
-        <text x="400" y="1628" font-family="Georgia,serif" font-size="29" letter-spacing="9">CASAMENTO</text>
-        <text x="400" y="1715" font-family="Georgia,serif" font-style="italic" font-size="74">Emanuelle Thaíza</text>
-        <text x="400" y="1795" font-family="Georgia,serif" font-style="italic" font-size="68">e João Vitor</text>
-        <text x="400" y="1860" font-family="Georgia,serif" font-size="29" letter-spacing="11">10 • 10 • 2026</text>
-      </g>
-    </svg>
+    <img
+  id="frameOverlay"
+  class="framePng"
+  src="moldura-casamento.png"
+  alt="Moldura do casamento"
+/>
   </div>
 
   <div id="cameraControls" class="controls">
@@ -211,7 +128,7 @@ const endpoint='https://gxsqgezfiuxxhpeaepem.supabase.co/functions/v1/wedding-ap
 const guest=document.getElementById('guest'),admin=document.getElementById('admin');
 if(new URLSearchParams(location.search).has('admin')){guest.classList.add('hidden');admin.classList.remove('hidden')}
 
-const preview=document.getElementById('photoPreview'),placeholder=document.getElementById('placeholder'),frameSvg=document.getElementById('frameSvg');
+const preview=document.getElementById('photoPreview'),placeholder=document.getElementById('placeholder'),frameOverlay=document.getElementById('frameOverlay');
 const canvas=document.getElementById('canvas'),ctx=canvas.getContext('2d');
 const cameraControls=document.getElementById('cameraControls'),previewControls=document.getElementById('previewControls'),doneControls=document.getElementById('doneControls'),sendStatus=document.getElementById('sendStatus');
 let finalData=null;
@@ -223,37 +140,79 @@ function drawPhoto9x16(img){
   const scale=Math.max(W/sw,H/sh),dw=sw*scale,dh=sh*scale;
   ctx.drawImage(img,(W-dw)/2,(H-dh)/2,dw,dh);
 }
-function frameToImage(){
-  const xml=new XMLSerializer().serializeToString(frameSvg);
-  const url=URL.createObjectURL(new Blob([xml],{type:'image/svg+xml'}));
-  return new Promise((resolve,reject)=>{const i=new Image();i.onload=()=>{URL.revokeObjectURL(url);resolve(i)};i.onerror=e=>{URL.revokeObjectURL(url);reject(e)};i.src=url});
+const FRAME_SRC = 'moldura-casamento.png';
+
+function loadImage(src){
+  return new Promise((resolve,reject)=>{
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
 }
 async function processFile(file){
-  if(!file)return;
-  const url=URL.createObjectURL(file),img=new Image();
-  img.onload=async()=>{
-    try{
-      drawPhoto9x16(img);
-      const f=await frameToImage();ctx.drawImage(f,0,0,1080,1920);
-      finalData=canvas.toDataURL('image/jpeg',.97);
-      preview.src=finalData;preview.classList.remove('hidden');
-      placeholder.classList.add('hidden');frameSvg.classList.add('hidden');
-      cameraControls.classList.add('hidden');previewControls.classList.remove('hidden');
-    }catch(e){console.error(e);alert('Não foi possível aplicar a moldura. Tente novamente.')}
-    finally{URL.revokeObjectURL(url)}
-  };
-  img.onerror=()=>{URL.revokeObjectURL(url);alert('Não foi possível abrir esta foto.')};
+  if(!file) return;
+
+  const photoUrl = URL.createObjectURL(file);
+
+  try {
+    const [photo, frame] = await Promise.all([
+      loadImage(photoUrl),
+      loadImage(FRAME_SRC)
+    ]);
+
+    // Primeiro coloca a foto exatamente no canvas 9:16
+    drawPhoto9x16(photo);
+
+    // Depois aplica EXATAMENTE a PNG escolhida
+    ctx.drawImage(frame, 0, 0, 1080, 1920);
+
+    // Cria a foto final pronta para Story
+    finalData = canvas.toDataURL('image/jpeg', 0.97);
+
+    preview.src = finalData;
+    preview.classList.remove('hidden');
+
+    placeholder.classList.add('hidden');
+
+    // A moldura já está incorporada na foto.
+    // Escondemos a camada HTML para não duplicar.
+    frameOverlay.classList.add('hidden');
+
+    cameraControls.classList.add('hidden');
+    previewControls.classList.remove('hidden');
+
+  } catch(error) {
+    console.error(error);
+
+    alert(
+      'Não foi possível aplicar a moldura. Confira se moldura-casamento.png está no repositório.'
+    );
+
+  } finally {
+    URL.revokeObjectURL(photoUrl);
+  }
+}{
   img.src=url;
 }
 cameraInput.onchange=e=>{processFile(e.target.files?.[0]);e.target.value=''};
 galleryInput.onchange=e=>{processFile(e.target.files?.[0]);e.target.value=''};
 
 function reset(){
-  preview.classList.add('hidden');preview.removeAttribute('src');
-  placeholder.classList.remove('hidden');frameSvg.classList.remove('hidden');
-  previewControls.classList.add('hidden');doneControls.classList.add('hidden');cameraControls.classList.remove('hidden');
-  finalData=null;consent.checked=false;sendStatus.textContent='';
-}
+  preview.classList.add('hidden');
+  preview.removeAttribute('src');
+
+  placeholder.classList.remove('hidden');
+  frameOverlay.classList.remove('hidden');
+
+  previewControls.classList.add('hidden');
+  doneControls.classList.add('hidden');
+  cameraControls.classList.remove('hidden');
+
+  finalData = null;
+  consent.checked = false;
+  sendStatus.textContent = '';
+};
 retake.onclick=reset;newPhoto.onclick=reset;
 
 send.onclick=async()=>{

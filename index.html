@@ -121,7 +121,7 @@ label{font-size:13px;line-height:1.4}
 </div>
 
 <canvas id="canvas" width="1080" height="1920" class="hidden"></canvas>
-<div class="version">v14-photo-return-fix</div>
+<div class="version">v15-photo-handler-fix</div>
 
 <script>
 const endpoint='https://gxsqgezfiuxxhpeaepem.supabase.co/functions/v1/wedding-app';
@@ -192,6 +192,7 @@ async function processFile(file){
   } finally {
     URL.revokeObjectURL(photoUrl);
   }
+}
 
 const cameraInput=document.getElementById('cameraInput');
 const galleryInput=document.getElementById('galleryInput');

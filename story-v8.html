@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"/>
+<meta name="theme-color" content="#211128"/>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+<title>E&J Moments — Story 9:16</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Arial,sans-serif;background:#160f1e;color:#fff}
+body{min-height:100dvh}
+.app{min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px}
+.intro{width:min(100%,430px);text-align:center;margin-bottom:10px}
+.intro h1{font-family:Georgia,serif;font-size:21px;font-weight:400;margin:0 0 5px}
+.intro p{margin:0;font-family:Georgia,serif;font-style:italic;font-size:16px;opacity:.92}
+.story{position:relative;width:min(100%,430px);aspect-ratio:9/16;border-radius:24px;overflow:hidden;background:#0b0710;box-shadow:0 20px 60px #0008}
+.photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#000}
+.placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:56px;background:radial-gradient(circle at 50% 38%,#503863,#100b15 72%)}
+.placeholder span{font-size:14px;line-height:1.55;color:#ffffffb8}
+.frameSvg{position:absolute;inset:0;width:100%;height:100%;z-index:5;pointer-events:none}
+.controls{width:min(100%,430px);padding:14px 2px 0;display:flex;flex-direction:column;gap:10px}
+.row{display:flex;gap:10px}
+.btn,.cameraLabel{border:0;border-radius:999px;padding:14px 18px;font-size:14px;font-weight:700;letter-spacing:.03em;cursor:pointer;text-align:center;display:block;width:100%}
+.primary{background:linear-gradient(135deg,#aa83d2,#674985);color:#fff}
+.secondary{background:#fff;color:#4d3766}
+.ghost{background:#ffffff18;color:#fff;border:1px solid #ffffff33}
+.panel{width:min(100%,430px);background:#fff;color:#33273d;padding:20px;border-radius:22px}
+input[type=text],input[type=password]{width:100%;padding:13px 15px;border:1px solid #ddcfea;border-radius:14px;font-size:16px}
+label{font-size:13px;line-height:1.4}
+.hidden{display:none!important}
+.status{text-align:center;font-size:13px;min-height:18px}
+.success{color:#baf0c7}
+.adminCard{width:min(100%,900px);background:#fff;color:#2f2538;padding:20px;border-radius:22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.tile img{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:12px}
+.tile{font-size:12px}
+a{color:#6c4a90}
+.version{position:fixed;right:8px;bottom:6px;font-size:9px;color:#ffffff28}
+</style>
+</head>
+<body>
+<div id="guest" class="app">
+  <div class="intro">
+    <h1>Emanuelle Thaíza & João Vitor</h1>
+    <p>Eternize o nosso grande dia através do seu olhar ♡</p>
+  </div>
+
+  <div class="story" id="story">
+    <div id="placeholder" class="placeholder">
+      <span>A foto final será montada exatamente em <b>1080 × 1920</b>, proporção <b>9:16</b>.</span>
+    </div>
+    <img id="photoPreview" class="photo hidden" alt="Prévia"/>
+
+    <svg id="frameSvg" class="frameSvg" viewBox="0 0 1080 1920" preserveAspectRatio="none" aria-label="Moldura do casamento">
+      <defs>
+        <linearGradient id="lav" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#efe6f7"/>
+          <stop offset=".45" stop-color="#b88ad9"/>
+          <stop offset="1" stop-color="#715080"/>
+        </linearGradient>
+        <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#6f6f64"/>
+          <stop offset="1" stop-color="#343a31"/>
+        </linearGradient>
+        <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+          <feDropShadow dx="0" dy="4" stdDeviation="7" flood-color="#000" flood-opacity=".45"/>
+        </filter>
+      </defs>
+
+      <!-- Top-left rich floral cluster -->
+      <g transform="translate(0,0)" filter="url(#shadow)">
+        <g stroke="#6d537a" stroke-width="8" fill="none" stroke-linecap="round">
+          <path d="M40 330 C130 235 150 120 185 15"/>
+          <path d="M95 380 C175 255 260 155 330 35"/>
+          <path d="M15 250 C95 175 105 95 130 20"/>
+          <path d="M150 430 C215 300 320 220 415 100"/>
+        </g>
+        <g fill="url(#leaf)" opacity=".95">
+          <ellipse cx="95" cy="255" rx="28" ry="62" transform="rotate(-30 95 255)"/>
+          <ellipse cx="150" cy="215" rx="25" ry="58" transform="rotate(20 150 215)"/>
+          <ellipse cx="205" cy="160" rx="26" ry="60" transform="rotate(-25 205 160)"/>
+          <ellipse cx="270" cy="135" rx="24" ry="56" transform="rotate(28 270 135)"/>
+          <ellipse cx="330" cy="95" rx="22" ry="52" transform="rotate(-18 330 95)"/>
+        </g>
+        <g fill="url(#lav)">
+          <ellipse cx="67" cy="300" rx="19" ry="42" transform="rotate(-28 67 300)"/>
+          <ellipse cx="86" cy="263" rx="18" ry="40" transform="rotate(-22 86 263)"/>
+          <ellipse cx="111" cy="220" rx="18" ry="39" transform="rotate(-16 111 220)"/>
+          <ellipse cx="157" cy="178" rx="20" ry="44" transform="rotate(22 157 178)"/>
+          <ellipse cx="188" cy="135" rx="18" ry="40" transform="rotate(25 188 135)"/>
+          <ellipse cx="235" cy="120" rx="19" ry="42" transform="rotate(-16 235 120)"/>
+          <ellipse cx="285" cy="90" rx="18" ry="39" transform="rotate(20 285 90)"/>
+          <ellipse cx="345" cy="64" rx="17" ry="37" transform="rotate(-18 345 64)"/>
+          <ellipse cx="120" cy="355" rx="18" ry="40" transform="rotate(15 120 355)"/>
+          <ellipse cx="165" cy="320" rx="17" ry="38" transform="rotate(-12 165 320)"/>
+        </g>
+        <!-- orchids -->
+        <g transform="translate(125,115)" fill="#fff">
+          <ellipse cx="0" cy="-34" rx="38" ry="56"/>
+          <ellipse cx="0" cy="34" rx="38" ry="56"/>
+          <ellipse cx="-40" cy="0" rx="52" ry="35"/>
+          <ellipse cx="40" cy="0" rx="52" ry="35"/>
+          <circle cx="0" cy="0" r="18" fill="#e3b36f"/>
+        </g>
+        <g transform="translate(55,175) scale(.7)" fill="#fff">
+          <ellipse cx="0" cy="-34" rx="38" ry="56"/>
+          <ellipse cx="0" cy="34" rx="38" ry="56"/>
+          <ellipse cx="-40" cy="0" rx="52" ry="35"/>
+          <ellipse cx="40" cy="0" rx="52" ry="35"/>
+          <circle cx="0" cy="0" r="18" fill="#e3b36f"/>
+        </g>
+      </g>
+
+      <!-- E|J monogram -->
+      <g fill="#3a102f" filter="url(#shadow)">
+        <text x="880" y="150" text-anchor="middle" font-family="Georgia,serif" font-size="86">E | J</text>
+        <path d="M824 210 C865 170 891 194 865 225 C850 241 837 252 823 270 C808 249 794 239 784 224 C763 194 795 174 824 210Z" fill="#5a1a49"/>
+        <path d="M835 270 C900 250 935 258 982 280" fill="none" stroke="#5a1a49" stroke-width="7" stroke-linecap="round"/>
+      </g>
+
+      <!-- Bottom-right floral cluster -->
+      <g transform="translate(1080,1920) rotate(180)" filter="url(#shadow)">
+        <g stroke="#6d537a" stroke-width="8" fill="none" stroke-linecap="round">
+          <path d="M35 360 C115 260 165 125 205 20"/>
+          <path d="M95 420 C190 300 280 180 385 55"/>
+          <path d="M170 460 C245 330 355 245 470 120"/>
+        </g>
+        <g fill="url(#leaf)">
+          <ellipse cx="105" cy="275" rx="28" ry="62" transform="rotate(-28 105 275)"/>
+          <ellipse cx="165" cy="225" rx="25" ry="58" transform="rotate(24 165 225)"/>
+          <ellipse cx="225" cy="170" rx="26" ry="60" transform="rotate(-22 225 170)"/>
+          <ellipse cx="300" cy="135" rx="24" ry="56" transform="rotate(28 300 135)"/>
+          <ellipse cx="375" cy="90" rx="22" ry="52" transform="rotate(-16 375 90)"/>
+        </g>
+        <g fill="url(#lav)">
+          <ellipse cx="75" cy="320" rx="20" ry="43" transform="rotate(-26 75 320)"/>
+          <ellipse cx="105" cy="275" rx="18" ry="40" transform="rotate(-18 105 275)"/>
+          <ellipse cx="145" cy="225" rx="19" ry="42" transform="rotate(18 145 225)"/>
+          <ellipse cx="195" cy="185" rx="18" ry="40" transform="rotate(-18 195 185)"/>
+          <ellipse cx="255" cy="145" rx="19" ry="42" transform="rotate(18 255 145)"/>
+          <ellipse cx="320" cy="105" rx="18" ry="39" transform="rotate(-14 320 105)"/>
+          <ellipse cx="390" cy="75" rx="17" ry="37" transform="rotate(18 390 75)"/>
+        </g>
+        <g transform="translate(135,135)" fill="#fff">
+          <ellipse cx="0" cy="-34" rx="38" ry="56"/>
+          <ellipse cx="0" cy="34" rx="38" ry="56"/>
+          <ellipse cx="-40" cy="0" rx="52" ry="35"/>
+          <ellipse cx="40" cy="0" rx="52" ry="35"/>
+          <circle cx="0" cy="0" r="18" fill="#e3b36f"/>
+        </g>
+        <g transform="translate(220,95) scale(.75)" fill="#fff">
+          <ellipse cx="0" cy="-34" rx="38" ry="56"/>
+          <ellipse cx="0" cy="34" rx="38" ry="56"/>
+          <ellipse cx="-40" cy="0" rx="52" ry="35"/>
+          <ellipse cx="40" cy="0" rx="52" ry="35"/>
+          <circle cx="0" cy="0" r="18" fill="#e3b36f"/>
+        </g>
+      </g>
+
+      <!-- Bottom identity -->
+      <g fill="#3a102f" text-anchor="middle" filter="url(#shadow)">
+        <text x="430" y="1645" font-family="Georgia,serif" font-style="italic" font-size="72">Emanuelle Thaíza</text>
+        <text x="430" y="1725" font-family="Georgia,serif" font-style="italic" font-size="70">e João Vitor</text>
+        <text x="430" y="1790" font-family="Georgia,serif" font-size="28" letter-spacing="12">10 • 10 • 2026</text>
+      </g>
+    </svg>
+  </div>
+
+  <div id="cameraControls" class="controls">
+    <label for="cameraInput" class="cameraLabel primary">Abrir câmera do celular</label>
+    <label for="galleryInput" class="cameraLabel ghost">Escolher foto da galeria</label>
+    <div class="status">A câmera nativa preserva a qualidade. O site aplica a moldura depois.</div>
+  </div>
+
+  <div id="previewControls" class="controls hidden">
+    <div class="panel">
+      <input id="guestName" type="text" maxlength="80" placeholder="Seu nome (opcional)"/>
+      <div style="height:10px"></div>
+      <label><input id="consent" type="checkbox"/> Concordo em enviar esta foto aos noivos. Ela não ficará visível para outros convidados.</label>
+    </div>
+    <div class="row">
+      <button id="retake" class="btn secondary">Refazer foto</button>
+      <button id="send" class="btn primary">Enviar aos noivos</button>
+    </div>
+    <div id="sendStatus" class="status"></div>
+  </div>
+
+  <div id="doneControls" class="controls hidden">
+    <button id="save" class="btn primary">Salvar no meu celular</button>
+    <button id="newPhoto" class="btn secondary">Tirar outra foto</button>
+    <div class="status success">Foto enviada com sucesso ♡</div>
+  </div>
+
+  <input id="cameraInput" type="file" accept="image/*" capture="environment" class="hidden"/>
+  <input id="galleryInput" type="file" accept="image/*" class="hidden"/>
+</div>
+
+<div id="admin" class="app hidden">
+  <div class="adminCard">
+    <h2 style="font-family:Georgia,serif;margin-top:0">Galeria dos noivos</h2>
+    <div id="loginBox">
+      <input id="adminPass" type="password" placeholder="Senha do painel"/>
+      <div style="height:10px"></div>
+      <button id="adminLogin" class="btn primary" style="width:100%">Entrar</button>
+      <div id="adminStatus" class="status" style="color:#6d4b88"></div>
+    </div>
+    <div id="galleryBox" class="hidden">
+      <div class="row" style="margin-bottom:14px">
+        <button id="refresh" class="btn secondary">Atualizar</button>
+        <button id="downloadAll" class="btn primary">Baixar todas</button>
+      </div>
+      <div id="gallery" class="grid"></div>
+    </div>
+  </div>
+</div>
+
+<canvas id="canvas" width="1080" height="1920" class="hidden"></canvas>
+<div class="version">v8-inline-frame</div>
+
+<script>
+const endpoint='https://gxsqgezfiuxxhpeaepem.supabase.co/functions/v1/wedding-app';
+const guest=document.getElementById('guest'),admin=document.getElementById('admin');
+if(new URLSearchParams(location.search).has('admin')){guest.classList.add('hidden');admin.classList.remove('hidden')}
+
+const preview=document.getElementById('photoPreview');
+const placeholder=document.getElementById('placeholder');
+const frameSvg=document.getElementById('frameSvg');
+const canvas=document.getElementById('canvas');
+const ctx=canvas.getContext('2d');
+const cameraControls=document.getElementById('cameraControls');
+const previewControls=document.getElementById('previewControls');
+const doneControls=document.getElementById('doneControls');
+const sendStatus=document.getElementById('sendStatus');
+let finalData=null;
+
+function drawPhotoCover(img){
+  const W=1080,H=1920;
+  const sw=img.naturalWidth||img.width, sh=img.naturalHeight||img.height;
+  if(!sw||!sh) throw new Error('Imagem sem dimensões');
+  ctx.clearRect(0,0,W,H);
+  ctx.imageSmoothingEnabled=true;
+  ctx.imageSmoothingQuality='high';
+  const scale=Math.max(W/sw,H/sh);
+  const dw=sw*scale, dh=sh*scale;
+  const dx=(W-dw)/2;
+  const dy=(H-dh)/2;
+  ctx.drawImage(img,dx,dy,dw,dh);
+}
+
+function svgToImage(svg){
+  const serializer=new XMLSerializer();
+  const str=serializer.serializeToString(svg);
+  const blob=new Blob([str],{type:'image/svg+xml;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  return new Promise((resolve,reject)=>{
+    const img=new Image();
+    img.onload=()=>{URL.revokeObjectURL(url);resolve(img)};
+    img.onerror=e=>{URL.revokeObjectURL(url);reject(e)};
+    img.src=url;
+  });
+}
+
+async function processFile(file){
+  if(!file)return;
+  const fileUrl=URL.createObjectURL(file);
+  const img=new Image();
+
+  img.onload=async()=>{
+    try{
+      drawPhotoCover(img);
+      const frameImg=await svgToImage(frameSvg);
+      ctx.drawImage(frameImg,0,0,1080,1920);
+      finalData=canvas.toDataURL('image/jpeg',0.97);
+
+      preview.src=finalData;
+      preview.classList.remove('hidden');
+      placeholder.classList.add('hidden');
+      frameSvg.classList.add('hidden');
+      cameraControls.classList.add('hidden');
+      previewControls.classList.remove('hidden');
+    }catch(e){
+      console.error(e);
+      alert('Não foi possível aplicar a moldura. Tente novamente.');
+    }finally{
+      URL.revokeObjectURL(fileUrl);
+    }
+  };
+
+  img.onerror=()=>{
+    URL.revokeObjectURL(fileUrl);
+    alert('Não foi possível abrir esta foto. Tente novamente.');
+  };
+
+  img.src=fileUrl;
+}
+
+document.getElementById('cameraInput').addEventListener('change',e=>{
+  const file=e.target.files&&e.target.files[0];
+  processFile(file);
+  e.target.value='';
+});
+document.getElementById('galleryInput').addEventListener('change',e=>{
+  const file=e.target.files&&e.target.files[0];
+  processFile(file);
+  e.target.value='';
+});
+
+function backToCamera(){
+  preview.classList.add('hidden');
+  preview.removeAttribute('src');
+  placeholder.classList.remove('hidden');
+  frameSvg.classList.remove('hidden');
+  previewControls.classList.add('hidden');
+  doneControls.classList.add('hidden');
+  cameraControls.classList.remove('hidden');
+  finalData=null;
+  document.getElementById('consent').checked=false;
+  sendStatus.textContent='';
+}
+document.getElementById('retake').onclick=backToCamera;
+document.getElementById('newPhoto').onclick=backToCamera;
+
+document.getElementById('send').onclick=async()=>{
+  if(!finalData)return;
+  if(!document.getElementById('consent').checked){
+    sendStatus.textContent='Marque o consentimento antes de enviar.';
+    return;
+  }
+  const btn=document.getElementById('send');
+  btn.disabled=true;
+  sendStatus.textContent='Enviando…';
+  try{
+    const r=await fetch(endpoint,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        action:'upload',
+        image:finalData,
+        guest_name:document.getElementById('guestName').value.trim()
+      })
+    });
+    const j=await r.json();
+    if(!r.ok)throw new Error(j.error||'Falha no envio');
+    previewControls.classList.add('hidden');
+    doneControls.classList.remove('hidden');
+  }catch(e){
+    sendStatus.textContent='Não foi possível enviar. Tente novamente.';
+  }finally{
+    btn.disabled=false;
+  }
+};
+
+document.getElementById('save').onclick=()=>{
+  if(!finalData)return;
+  const a=document.createElement('a');
+  a.href=finalData;
+  a.download='EJ-Story-10-10-2026.jpg';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+};
+
+async function adminList(){
+  const pass=document.getElementById('adminPass').value;
+  const st=document.getElementById('adminStatus');
+  st.textContent='Carregando…';
+  const r=await fetch(endpoint,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({action:'admin-list',password:pass})
+  });
+  const j=await r.json();
+  if(!r.ok){st.textContent='Senha incorreta.';return}
+  st.textContent='';
+  document.getElementById('loginBox').classList.add('hidden');
+  document.getElementById('galleryBox').classList.remove('hidden');
+  const g=document.getElementById('gallery');
+  g.innerHTML='';
+  window.__photos=j.photos||[];
+  for(const p of window.__photos){
+    const d=document.createElement('div');
+    d.className='tile';
+    d.innerHTML='<a href="'+p.url+'" target="_blank"><img src="'+p.url+'"></a><div><b>'+(p.guest_name||'Convidado(a)')+'</b></div><div>'+new Date(p.created_at).toLocaleString('pt-BR')+'</div><a href="'+p.url+'" download>Baixar</a>';
+    g.appendChild(d);
+  }
+}
+document.getElementById('adminLogin').onclick=adminList;
+document.getElementById('refresh').onclick=adminList;
+document.getElementById('downloadAll').onclick=async()=>{
+  for(const p of(window.__photos||[])){
+    const a=document.createElement('a');
+    a.href=p.url;
+    a.download='foto-casamento.jpg';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    await new Promise(r=>setTimeout(r,350));
+  }
+};
+</script>
+</body>
+</html>

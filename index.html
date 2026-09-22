@@ -1,27 +1,37 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<meta name="theme-color" content="#1b1022">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"/>
+<meta name="theme-color" content="#1b1022"/>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
 <title>E&J Moments</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Arial,sans-serif;background:#160f1e;color:#fff}
-body{min-height:100dvh}.app{min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px}
-.intro{width:min(100%,430px);text-align:center;margin:0 0 12px}.intro h1{font-family:Georgia,serif;font-size:21px;font-weight:400;margin:0 0 5px}.intro p{margin:0;font:italic 16px Georgia,serif;opacity:.94}
-.story{position:relative;width:min(100%,430px);aspect-ratio:9/16;overflow:hidden;border-radius:22px;background:radial-gradient(circle at 50% 42%,#503862,#0b0710 76%);box-shadow:0 20px 60px #0008}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Arial,sans-serif;background:#160f1e;color:#fff}
+body{min-height:100dvh}
+.app{min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px}
+.intro{width:min(100%,430px);text-align:center;margin-bottom:10px}
+.intro h1{font:400 21px Georgia,serif;margin:0 0 4px}
+.intro p{font:italic 16px Georgia,serif;margin:0;opacity:.92}
+.story{position:relative;width:min(100%,430px);aspect-ratio:9/16;border-radius:24px;overflow:hidden;background:#09060d;box-shadow:0 20px 60px #0008}
 .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#000}
-.frame{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block;z-index:5;pointer-events:none}
-.placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:68px;z-index:1}
-.placeholder span{font-size:13px;line-height:1.5;color:#ffffffc9}
-.controls{width:min(100%,430px);padding:14px 2px 0;display:flex;flex-direction:column;gap:10px}.row{display:flex;gap:10px}
-.btn,.cameraLabel{border:0;border-radius:999px;padding:14px 18px;font-size:14px;font-weight:700;letter-spacing:.02em;cursor:pointer;flex:1;text-align:center}
-.primary{background:linear-gradient(135deg,#aa83d2,#674985);color:#fff}.secondary{background:#fff;color:#4d3766}.ghost{background:#ffffff12;color:#fff;border:1px solid #ffffff30}
-.panel{width:100%;background:#fff;color:#33273d;padding:18px;border-radius:20px}input[type=text],input[type=password]{width:100%;padding:13px 15px;border:1px solid #ddcfea;border-radius:14px;font-size:16px}
-label{font-size:13px;line-height:1.45}.hidden{display:none!important}.status{text-align:center;font-size:13px;min-height:18px}.success{color:#baf0c7}
-.adminCard{width:min(100%,900px);background:#fff;color:#2f2538;padding:20px;border-radius:22px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}.tile img{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:12px}.tile{font-size:12px}a{color:#6c4a90}
-.version{position:fixed;right:7px;bottom:5px;font-size:9px;color:#ffffff25}
+.frameSvg{position:absolute;inset:0;width:100%;height:100%;z-index:5;pointer-events:none}
+.placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:58px;background:radial-gradient(circle at 50% 35%,#4d365f,#120b19 72%)}
+.placeholder span{font-size:14px;line-height:1.55;color:#ffffffc0}
+.controls{width:min(100%,430px);padding:14px 2px 0;display:flex;flex-direction:column;gap:10px}
+.row{display:flex;gap:10px}
+.btn,.fileLabel{border:0;border-radius:999px;padding:14px 18px;font-size:14px;font-weight:700;letter-spacing:.03em;cursor:pointer;text-align:center;width:100%;display:block}
+.primary{background:linear-gradient(135deg,#b892d6,#6d4a86);color:#fff}
+.secondary{background:#fff;color:#4d3766}
+.ghost{background:#ffffff14;color:#fff;border:1px solid #ffffff2b}
+.panel{width:min(100%,430px);background:#fff;color:#33273d;padding:20px;border-radius:22px}
+input[type=text],input[type=password]{width:100%;padding:13px 15px;border:1px solid #ddcfea;border-radius:14px;font-size:16px}
+label{font-size:13px;line-height:1.4}
+.hidden{display:none!important}.status{text-align:center;font-size:13px;min-height:18px}.success{color:#baf0c7}
+.adminCard{width:min(100%,900px);background:#fff;color:#2f2538;padding:20px;border-radius:22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}.tile img{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:12px}.tile{font-size:12px}a{color:#6c4a90}
+.version{position:fixed;right:8px;bottom:6px;font-size:9px;color:#ffffff2a}
 </style>
 </head>
 <body>
@@ -32,22 +42,136 @@ label{font-size:13px;line-height:1.45}.hidden{display:none!important}.status{tex
   </div>
 
   <div class="story">
-    <div id="placeholder" class="placeholder"><span>Abra a câmera do celular. A foto será enquadrada em <b>9:16</b>, pronta para o Story.</span></div>
-    <img id="photoPreview" class="photo hidden" alt="Prévia">
-    <img id="framePreview" class="frame" src="moldura-casamento.webp?v=10" alt="Moldura E&J">
+    <div id="placeholder" class="placeholder">
+      <span>A foto final será montada em <b>1080 × 1920</b>, formato <b>9:16</b> para Story.</span>
+    </div>
+    <img id="photoPreview" class="photo hidden" alt="Prévia"/>
+
+    <svg id="frameSvg" class="frameSvg" viewBox="0 0 1080 1920" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#efe2f7"/>
+          <stop offset=".35" stop-color="#c7a1df"/>
+          <stop offset=".72" stop-color="#8d63a9"/>
+          <stop offset="1" stop-color="#583865"/>
+        </linearGradient>
+        <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#7c786d"/>
+          <stop offset="1" stop-color="#43463d"/>
+        </linearGradient>
+        <filter id="s"><feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#000" flood-opacity=".38"/></filter>
+      </defs>
+
+      <!-- dense top-left composition inspired by the selected frame -->
+      <g filter="url(#s)">
+        <g stroke="#6f5579" stroke-width="8" fill="none" stroke-linecap="round">
+          <path d="M15 490 C90 345 165 185 210 5"/>
+          <path d="M55 420 C155 300 270 180 395 35"/>
+          <path d="M5 330 C70 235 120 125 145 10"/>
+          <path d="M120 510 C245 370 350 275 485 125"/>
+        </g>
+        <g fill="url(#leaf)" opacity=".96">
+          <ellipse cx="65" cy="370" rx="28" ry="66" transform="rotate(-28 65 370)"/>
+          <ellipse cx="120" cy="305" rx="26" ry="62" transform="rotate(22 120 305)"/>
+          <ellipse cx="175" cy="240" rx="25" ry="59" transform="rotate(-20 175 240)"/>
+          <ellipse cx="235" cy="190" rx="27" ry="63" transform="rotate(28 235 190)"/>
+          <ellipse cx="310" cy="135" rx="25" ry="60" transform="rotate(-22 310 135)"/>
+          <ellipse cx="390" cy="90" rx="23" ry="55" transform="rotate(18 390 90)"/>
+        </g>
+        <g fill="url(#purple)">
+          <ellipse cx="34" cy="430" rx="18" ry="44" transform="rotate(-25 34 430)"/>
+          <ellipse cx="58" cy="382" rx="19" ry="46" transform="rotate(-20 58 382)"/>
+          <ellipse cx="82" cy="330" rx="20" ry="47" transform="rotate(-15 82 330)"/>
+          <ellipse cx="112" cy="276" rx="19" ry="45" transform="rotate(15 112 276)"/>
+          <ellipse cx="150" cy="235" rx="20" ry="48" transform="rotate(22 150 235)"/>
+          <ellipse cx="196" cy="195" rx="18" ry="43" transform="rotate(-18 196 195)"/>
+          <ellipse cx="245" cy="160" rx="19" ry="46" transform="rotate(18 245 160)"/>
+          <ellipse cx="302" cy="120" rx="18" ry="43" transform="rotate(-15 302 120)"/>
+          <ellipse cx="365" cy="88" rx="17" ry="40" transform="rotate(19 365 88)"/>
+          <ellipse cx="420" cy="70" rx="16" ry="38" transform="rotate(-16 420 70)"/>
+          <ellipse cx="105" cy="420" rx="18" ry="43" transform="rotate(12 105 420)"/>
+          <ellipse cx="155" cy="375" rx="18" ry="42" transform="rotate(-10 155 375)"/>
+        </g>
+
+        <g transform="translate(145 138)" fill="#fff">
+          <ellipse cx="0" cy="-42" rx="44" ry="64"/><ellipse cx="0" cy="42" rx="44" ry="64"/>
+          <ellipse cx="-47" cy="0" rx="63" ry="40"/><ellipse cx="47" cy="0" rx="63" ry="40"/>
+          <circle cx="0" cy="0" r="20" fill="#e0b06e"/>
+        </g>
+        <g transform="translate(72 218) scale(.74)" fill="#fff">
+          <ellipse cx="0" cy="-42" rx="44" ry="64"/><ellipse cx="0" cy="42" rx="44" ry="64"/>
+          <ellipse cx="-47" cy="0" rx="63" ry="40"/><ellipse cx="47" cy="0" rx="63" ry="40"/>
+          <circle cx="0" cy="0" r="20" fill="#e0b06e"/>
+        </g>
+      </g>
+
+      <!-- top-right monogram -->
+      <g fill="#421137" filter="url(#s)">
+        <text x="880" y="175" text-anchor="middle" font-family="Georgia,serif" font-size="104">E | J</text>
+        <path d="M820 228 C855 190 890 212 867 245 C851 263 836 277 820 298 C803 278 789 265 778 247 C755 212 790 190 820 228Z" fill="#5d1a4c"/>
+        <path d="M830 295 C905 270 940 278 1002 306" fill="none" stroke="#5d1a4c" stroke-width="7" stroke-linecap="round"/>
+      </g>
+
+      <!-- bottom-right dense cluster -->
+      <g transform="translate(1080 1920) rotate(180)" filter="url(#s)">
+        <g stroke="#6f5579" stroke-width="8" fill="none" stroke-linecap="round">
+          <path d="M15 500 C90 350 170 195 220 5"/>
+          <path d="M60 445 C160 315 280 190 410 35"/>
+          <path d="M125 525 C250 380 365 280 500 130"/>
+        </g>
+        <g fill="url(#leaf)">
+          <ellipse cx="70" cy="380" rx="28" ry="66" transform="rotate(-28 70 380)"/>
+          <ellipse cx="125" cy="315" rx="26" ry="62" transform="rotate(22 125 315)"/>
+          <ellipse cx="185" cy="250" rx="25" ry="59" transform="rotate(-20 185 250)"/>
+          <ellipse cx="245" cy="195" rx="27" ry="63" transform="rotate(28 245 195)"/>
+          <ellipse cx="320" cy="140" rx="25" ry="60" transform="rotate(-22 320 140)"/>
+          <ellipse cx="400" cy="92" rx="23" ry="55" transform="rotate(18 400 92)"/>
+        </g>
+        <g fill="url(#purple)">
+          <ellipse cx="35" cy="440" rx="18" ry="44" transform="rotate(-25 35 440)"/>
+          <ellipse cx="60" cy="390" rx="19" ry="46" transform="rotate(-20 60 390)"/>
+          <ellipse cx="88" cy="338" rx="20" ry="47" transform="rotate(-15 88 338)"/>
+          <ellipse cx="118" cy="285" rx="19" ry="45" transform="rotate(15 118 285)"/>
+          <ellipse cx="158" cy="242" rx="20" ry="48" transform="rotate(22 158 242)"/>
+          <ellipse cx="205" cy="200" rx="18" ry="43" transform="rotate(-18 205 200)"/>
+          <ellipse cx="255" cy="162" rx="19" ry="46" transform="rotate(18 255 162)"/>
+          <ellipse cx="315" cy="122" rx="18" ry="43" transform="rotate(-15 315 122)"/>
+          <ellipse cx="380" cy="88" rx="17" ry="40" transform="rotate(19 380 88)"/>
+          <ellipse cx="438" cy="68" rx="16" ry="38" transform="rotate(-16 438 68)"/>
+        </g>
+        <g transform="translate(150 150)" fill="#fff">
+          <ellipse cx="0" cy="-42" rx="44" ry="64"/><ellipse cx="0" cy="42" rx="44" ry="64"/>
+          <ellipse cx="-47" cy="0" rx="63" ry="40"/><ellipse cx="47" cy="0" rx="63" ry="40"/>
+          <circle cx="0" cy="0" r="20" fill="#e0b06e"/>
+        </g>
+        <g transform="translate(240 110) scale(.72)" fill="#fff">
+          <ellipse cx="0" cy="-42" rx="44" ry="64"/><ellipse cx="0" cy="42" rx="44" ry="64"/>
+          <ellipse cx="-47" cy="0" rx="63" ry="40"/><ellipse cx="47" cy="0" rx="63" ry="40"/>
+          <circle cx="0" cy="0" r="20" fill="#e0b06e"/>
+        </g>
+      </g>
+
+      <!-- identity lower-left / center as in the preferred composition -->
+      <g fill="#421137" text-anchor="middle" filter="url(#s)">
+        <text x="400" y="1628" font-family="Georgia,serif" font-size="29" letter-spacing="9">CASAMENTO</text>
+        <text x="400" y="1715" font-family="Georgia,serif" font-style="italic" font-size="74">Emanuelle Thaíza</text>
+        <text x="400" y="1795" font-family="Georgia,serif" font-style="italic" font-size="68">e João Vitor</text>
+        <text x="400" y="1860" font-family="Georgia,serif" font-size="29" letter-spacing="11">10 • 10 • 2026</text>
+      </g>
+    </svg>
   </div>
 
   <div id="cameraControls" class="controls">
-    <label class="cameraLabel primary" for="cameraInput">Abrir câmera do celular</label>
-    <label class="cameraLabel ghost" for="galleryInput">Escolher foto da galeria</label>
-    <div class="status">A câmera nativa mantém a qualidade; o site aplica a moldura depois.</div>
+    <label class="fileLabel primary" for="cameraInput">Abrir câmera do celular</label>
+    <label class="fileLabel ghost" for="galleryInput">Escolher foto da galeria</label>
+    <div class="status">A câmera do celular preserva a qualidade; o site aplica a moldura depois.</div>
   </div>
 
   <div id="previewControls" class="controls hidden">
     <div class="panel">
-      <input id="guestName" type="text" maxlength="80" placeholder="Seu nome (opcional)">
+      <input id="guestName" type="text" maxlength="80" placeholder="Seu nome (opcional)"/>
       <div style="height:10px"></div>
-      <label><input id="consent" type="checkbox"> Concordo em enviar esta foto aos noivos. Ela não ficará visível para outros convidados.</label>
+      <label><input id="consent" type="checkbox"/> Concordo em enviar esta foto aos noivos. Ela não ficará visível para outros convidados.</label>
     </div>
     <div class="row"><button id="retake" class="btn secondary">Refazer foto</button><button id="send" class="btn primary">Enviar aos noivos</button></div>
     <div id="sendStatus" class="status"></div>
@@ -59,15 +183,15 @@ label{font-size:13px;line-height:1.45}.hidden{display:none!important}.status{tex
     <div class="status success">Foto enviada com sucesso ♡</div>
   </div>
 
-  <input id="cameraInput" class="hidden" type="file" accept="image/*" capture="environment">
-  <input id="galleryInput" class="hidden" type="file" accept="image/*">
+  <input id="cameraInput" type="file" accept="image/*" capture="environment" class="hidden"/>
+  <input id="galleryInput" type="file" accept="image/*" class="hidden"/>
 </div>
 
 <div id="admin" class="app hidden">
   <div class="adminCard">
     <h2 style="font-family:Georgia,serif;margin-top:0">Galeria dos noivos</h2>
     <div id="loginBox">
-      <input id="adminPass" type="password" placeholder="Senha do painel">
+      <input id="adminPass" type="password" placeholder="Senha do painel"/>
       <div style="height:10px"></div>
       <button id="adminLogin" class="btn primary" style="width:100%">Entrar</button>
       <div id="adminStatus" class="status" style="color:#6d4b88"></div>
@@ -80,88 +204,80 @@ label{font-size:13px;line-height:1.45}.hidden{display:none!important}.status{tex
 </div>
 
 <canvas id="canvas" width="1080" height="1920" class="hidden"></canvas>
-<div class="version">v10-exact-frame</div>
+<div class="version">v10-frame-update</div>
 
 <script>
 const endpoint='https://gxsqgezfiuxxhpeaepem.supabase.co/functions/v1/wedding-app';
-const FRAME_SRC='moldura-casamento.webp?v=10';
 const guest=document.getElementById('guest'),admin=document.getElementById('admin');
 if(new URLSearchParams(location.search).has('admin')){guest.classList.add('hidden');admin.classList.remove('hidden')}
 
-const preview=document.getElementById('photoPreview'),placeholder=document.getElementById('placeholder'),framePreview=document.getElementById('framePreview');
-const cameraControls=document.getElementById('cameraControls'),previewControls=document.getElementById('previewControls'),doneControls=document.getElementById('doneControls'),sendStatus=document.getElementById('sendStatus');
+const preview=document.getElementById('photoPreview'),placeholder=document.getElementById('placeholder'),frameSvg=document.getElementById('frameSvg');
 const canvas=document.getElementById('canvas'),ctx=canvas.getContext('2d');
-let finalData=null,photoOnlyData=null;
+const cameraControls=document.getElementById('cameraControls'),previewControls=document.getElementById('previewControls'),doneControls=document.getElementById('doneControls'),sendStatus=document.getElementById('sendStatus');
+let finalData=null;
 
-function loadImage(src){return new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=reject;im.src=src})}
-
-function drawCover(img){
+function drawPhoto9x16(img){
   const W=1080,H=1920,sw=img.naturalWidth||img.width,sh=img.naturalHeight||img.height;
   if(!sw||!sh)throw new Error('Imagem sem dimensões');
   ctx.clearRect(0,0,W,H);ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
-  const scale=Math.max(W/sw,H/sh),dw=sw*scale,dh=sh*scale,dx=(W-dw)/2,dy=(H-dh)/2;
-  ctx.drawImage(img,dx,dy,dw,dh);
+  const scale=Math.max(W/sw,H/sh),dw=sw*scale,dh=sh*scale;
+  ctx.drawImage(img,(W-dw)/2,(H-dh)/2,dw,dh);
 }
-
+function frameToImage(){
+  const xml=new XMLSerializer().serializeToString(frameSvg);
+  const url=URL.createObjectURL(new Blob([xml],{type:'image/svg+xml'}));
+  return new Promise((resolve,reject)=>{const i=new Image();i.onload=()=>{URL.revokeObjectURL(url);resolve(i)};i.onerror=e=>{URL.revokeObjectURL(url);reject(e)};i.src=url});
+}
 async function processFile(file){
   if(!file)return;
-  const url=URL.createObjectURL(file),photo=new Image();
-  photo.onload=async()=>{
+  const url=URL.createObjectURL(file),img=new Image();
+  img.onload=async()=>{
     try{
-      drawCover(photo);
-      photoOnlyData=canvas.toDataURL('image/jpeg',.97);
-      preview.src=photoOnlyData;
-      preview.classList.remove('hidden');
-      placeholder.classList.add('hidden');
-      framePreview.classList.remove('hidden');
-      cameraControls.classList.add('hidden');
-      previewControls.classList.remove('hidden');
-
-      const frame=await loadImage(FRAME_SRC);
-      ctx.drawImage(frame,0,0,1080,1920);
+      drawPhoto9x16(img);
+      const f=await frameToImage();ctx.drawImage(f,0,0,1080,1920);
       finalData=canvas.toDataURL('image/jpeg',.97);
-    }catch(e){
-      console.error(e);
-      alert('A foto foi aberta, mas houve um erro ao aplicar a moldura. Atualize a página e tente novamente.');
-    }finally{URL.revokeObjectURL(url)}
+      preview.src=finalData;preview.classList.remove('hidden');
+      placeholder.classList.add('hidden');frameSvg.classList.add('hidden');
+      cameraControls.classList.add('hidden');previewControls.classList.remove('hidden');
+    }catch(e){console.error(e);alert('Não foi possível aplicar a moldura. Tente novamente.')}
+    finally{URL.revokeObjectURL(url)}
   };
-  photo.onerror=()=>{URL.revokeObjectURL(url);alert('Não foi possível abrir esta foto.')};
-  photo.src=url;
+  img.onerror=()=>{URL.revokeObjectURL(url);alert('Não foi possível abrir esta foto.')};
+  img.src=url;
 }
+cameraInput.onchange=e=>{processFile(e.target.files?.[0]);e.target.value=''};
+galleryInput.onchange=e=>{processFile(e.target.files?.[0]);e.target.value=''};
 
-document.getElementById('cameraInput').addEventListener('change',e=>{const f=e.target.files&&e.target.files[0];processFile(f);e.target.value=''});
-document.getElementById('galleryInput').addEventListener('change',e=>{const f=e.target.files&&e.target.files[0];processFile(f);e.target.value=''});
-
-function resetPhoto(){
-  preview.classList.add('hidden');preview.removeAttribute('src');placeholder.classList.remove('hidden');framePreview.classList.remove('hidden');
+function reset(){
+  preview.classList.add('hidden');preview.removeAttribute('src');
+  placeholder.classList.remove('hidden');frameSvg.classList.remove('hidden');
   previewControls.classList.add('hidden');doneControls.classList.add('hidden');cameraControls.classList.remove('hidden');
-  finalData=null;photoOnlyData=null;document.getElementById('consent').checked=false;sendStatus.textContent='';
+  finalData=null;consent.checked=false;sendStatus.textContent='';
 }
-document.getElementById('retake').onclick=resetPhoto;document.getElementById('newPhoto').onclick=resetPhoto;
+retake.onclick=reset;newPhoto.onclick=reset;
 
-document.getElementById('send').onclick=async()=>{
-  if(!finalData){sendStatus.textContent='Aguarde a moldura terminar de carregar.';return}
-  if(!document.getElementById('consent').checked){sendStatus.textContent='Marque o consentimento antes de enviar.';return}
-  const btn=document.getElementById('send');btn.disabled=true;sendStatus.textContent='Enviando…';
+send.onclick=async()=>{
+  if(!finalData)return;
+  if(!consent.checked){sendStatus.textContent='Marque o consentimento antes de enviar.';return}
+  send.disabled=true;sendStatus.textContent='Enviando…';
   try{
-    const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'upload',image:finalData,guest_name:document.getElementById('guestName').value.trim()})});
+    const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'upload',image:finalData,guest_name:guestName.value.trim()})});
     const j=await r.json();if(!r.ok)throw new Error(j.error||'Falha no envio');
     previewControls.classList.add('hidden');doneControls.classList.remove('hidden');
-  }catch(e){sendStatus.textContent='Não foi possível enviar. Tente novamente.'}finally{btn.disabled=false}
+  }catch(e){sendStatus.textContent='Não foi possível enviar. Tente novamente.'}
+  finally{send.disabled=false}
 };
-
-document.getElementById('save').onclick=()=>{if(!finalData)return;const a=document.createElement('a');a.href=finalData;a.download='EJ-Story-10-10-2026.jpg';document.body.appendChild(a);a.click();a.remove()};
+save.onclick=()=>{if(!finalData)return;const a=document.createElement('a');a.href=finalData;a.download='EJ-Story-10-10-2026.jpg';document.body.appendChild(a);a.click();a.remove()};
 
 async function adminList(){
-  const pass=document.getElementById('adminPass').value,st=document.getElementById('adminStatus');st.textContent='Carregando…';
-  const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'admin-list',password:pass})});const j=await r.json();
-  if(!r.ok){st.textContent='Senha incorreta.';return}
-  st.textContent='';document.getElementById('loginBox').classList.add('hidden');document.getElementById('galleryBox').classList.remove('hidden');
-  const g=document.getElementById('gallery');g.innerHTML='';window.__photos=j.photos||[];
-  for(const p of window.__photos){const d=document.createElement('div');d.className='tile';d.innerHTML='<a href="'+p.url+'" target="_blank"><img src="'+p.url+'"></a><div><b>'+(p.guest_name||'Convidado(a)')+'</b></div><div>'+new Date(p.created_at).toLocaleString('pt-BR')+'</div><a href="'+p.url+'" download>Baixar</a>';g.appendChild(d)}
+  const pass=adminPass.value,st=adminStatus;st.textContent='Carregando…';
+  const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'admin-list',password:pass})});
+  const j=await r.json();if(!r.ok){st.textContent='Senha incorreta.';return}
+  st.textContent='';loginBox.classList.add('hidden');galleryBox.classList.remove('hidden');gallery.innerHTML='';window.__photos=j.photos||[];
+  for(const p of window.__photos){const d=document.createElement('div');d.className='tile';d.innerHTML='<a href="'+p.url+'" target="_blank"><img src="'+p.url+'"></a><div><b>'+(p.guest_name||'Convidado(a)')+'</b></div><div>'+new Date(p.created_at).toLocaleString('pt-BR')+'</div><a href="'+p.url+'" download>Baixar</a>';gallery.appendChild(d)}
 }
-document.getElementById('adminLogin').onclick=adminList;document.getElementById('refresh').onclick=adminList;
-document.getElementById('downloadAll').onclick=async()=>{for(const p of(window.__photos||[])){const a=document.createElement('a');a.href=p.url;a.download='foto-casamento.jpg';document.body.appendChild(a);a.click();a.remove();await new Promise(r=>setTimeout(r,350))}};
+adminLogin.onclick=adminList;refresh.onclick=adminList;
+downloadAll.onclick=async()=>{for(const p of(window.__photos||[])){const a=document.createElement('a');a.href=p.url;a.download='foto-casamento.jpg';document.body.appendChild(a);a.click();a.remove();await new Promise(r=>setTimeout(r,350))}};
 </script>
 </body>
 </html>

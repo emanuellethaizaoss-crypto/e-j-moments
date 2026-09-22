@@ -121,7 +121,7 @@ label{font-size:13px;line-height:1.4}
 </div>
 
 <canvas id="canvas" width="1080" height="1920" class="hidden"></canvas>
-<div class="version">v10-frame-update</div>
+<div class="version">v14-photo-return-fix</div>
 
 <script>
 const endpoint='https://gxsqgezfiuxxhpeaepem.supabase.co/functions/v1/wedding-app';
@@ -192,9 +192,16 @@ async function processFile(file){
   } finally {
     URL.revokeObjectURL(photoUrl);
   }
-}{
-  img.src=url;
-}
+
+const cameraInput=document.getElementById('cameraInput');
+const galleryInput=document.getElementById('galleryInput');
+const consent=document.getElementById('consent');
+const retake=document.getElementById('retake');
+const newPhoto=document.getElementById('newPhoto');
+const send=document.getElementById('send');
+const save=document.getElementById('save');
+const guestName=document.getElementById('guestName');
+
 cameraInput.onchange=e=>{processFile(e.target.files?.[0]);e.target.value=''};
 galleryInput.onchange=e=>{processFile(e.target.files?.[0]);e.target.value=''};
 

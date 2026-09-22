@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"/>
+<meta name="theme-color" content="#3d2b55"/>
+<title>E&J Moments</title>
+<style>
+:root{--plum:#4d3766;--lilac:#d8c5ec;--soft:#f8f4fb;--ink:#33273d;--white:#fff}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Arial,sans-serif;background:#160f1e;color:#fff}
+body{min-height:100dvh}.app{min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px}
+.story{position:relative;width:min(100%,430px);aspect-ratio:9/16;border-radius:24px;overflow:hidden;background:#100b15;box-shadow:0 20px 60px #0008}
+video,.photoPreview{width:100%;height:100%;object-fit:cover;display:block}
+video.mirror{transform:scaleX(-1)}
+.overlay{position:absolute;inset:0;pointer-events:none}
+.topMark{position:absolute;top:6.7%;left:50%;transform:translateX(-50%);font-family:Georgia,serif;font-size:22px;letter-spacing:.18em;text-shadow:0 1px 8px #0008}
+.phrase{position:absolute;top:13%;left:10%;right:10%;text-align:center;font-family:Georgia,serif;font-size:18px;line-height:1.35;font-style:italic;text-shadow:0 2px 10px #000b}
+.bottom{position:absolute;bottom:6.5%;left:8%;right:8%;text-align:center;text-shadow:0 2px 10px #000c}
+.names{font-family:Georgia,serif;font-size:22px}.date{font-size:12px;letter-spacing:.28em;margin-top:5px}
+.corner{position:absolute;width:120px;height:120px;opacity:.95}.tl{left:-8px;top:-6px}.br{right:-8px;bottom:-8px;transform:rotate(180deg)}
+.controls{width:min(100%,430px);padding:14px 2px 0;display:flex;flex-direction:column;gap:10px}
+.row{display:flex;gap:10px}.btn{border:0;border-radius:999px;padding:14px 18px;font-size:14px;font-weight:700;letter-spacing:.03em;cursor:pointer;flex:1}
+.primary{background:linear-gradient(135deg,#9e78c7,#674985);color:#fff}.secondary{background:#fff;color:#4d3766}.ghost{background:#ffffff18;color:#fff;border:1px solid #ffffff33}
+.shutter{width:74px;height:74px;border-radius:50%;background:#fff;border:6px solid #ffffff66;box-shadow:0 0 0 4px #0005;margin:auto}
+.panel{width:min(100%,430px);background:#fff;color:var(--ink);padding:20px;border-radius:22px}
+input[type=text],input[type=password]{width:100%;padding:13px 15px;border:1px solid #ddcfea;border-radius:14px;font-size:16px}
+label{font-size:13px;line-height:1.4}.muted{opacity:.76;font-size:13px}.hidden{display:none!important}
+.status{text-align:center;font-size:13px;min-height:18px}.success{color:#baf0c7}
+.adminCard{width:min(100%,900px);background:#fff;color:#2f2538;padding:20px;border-radius:22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}.tile img{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:12px}.tile{font-size:12px}
+a{color:#6c4a90}
+@media(max-width:380px){.phrase{font-size:16px}.names{font-size:19px}.btn{font-size:12px;padding:12px}}
+</style>
+</head>
+<body>
+<div id="guest" class="app">
+  <div class="story">
+    <video id="video" autoplay playsinline muted></video>
+    <img id="photoPreview" class="photoPreview hidden" alt="Prévia"/>
+    <div class="overlay">
+      <svg class="corner tl" viewBox="0 0 120 120" aria-hidden="true">
+        <g fill="none" stroke="#efe7f7" stroke-width="2"><path d="M8 110 C30 82 42 60 55 18"/><path d="M24 106 C43 84 59 65 74 38"/></g>
+        <g fill="#c7a7e8"><ellipse cx="48" cy="29" rx="5" ry="10"/><ellipse cx="43" cy="42" rx="5" ry="10"/><ellipse cx="37" cy="55" rx="5" ry="10"/><ellipse cx="68" cy="48" rx="5" ry="10"/><ellipse cx="61" cy="61" rx="5" ry="10"/><ellipse cx="54" cy="74" rx="5" ry="10"/></g>
+        <g fill="#fff"><circle cx="20" cy="90" r="7"/><circle cx="29" cy="84" r="7"/><circle cx="25" cy="75" r="7"/></g>
+      </svg>
+      <svg class="corner br" viewBox="0 0 120 120" aria-hidden="true">
+        <g fill="none" stroke="#efe7f7" stroke-width="2"><path d="M8 110 C30 82 42 60 55 18"/><path d="M24 106 C43 84 59 65 74 38"/></g>
+        <g fill="#c7a7e8"><ellipse cx="48" cy="29" rx="5" ry="10"/><ellipse cx="43" cy="42" rx="5" ry="10"/><ellipse cx="37" cy="55" rx="5" ry="10"/><ellipse cx="68" cy="48" rx="5" ry="10"/><ellipse cx="61" cy="61" rx="5" ry="10"/><ellipse cx="54" cy="74" rx="5" ry="10"/></g>
+        <g fill="#fff"><circle cx="20" cy="90" r="7"/><circle cx="29" cy="84" r="7"/><circle cx="25" cy="75" r="7"/></g>
+      </svg>
+      <div class="topMark">E | J</div>
+      <div class="phrase">Eternize o nosso grande dia<br/>através do seu olhar ♡</div>
+      <div class="bottom"><div class="names">Emanuelle Thaíza & João Vitor</div><div class="date">10.10.2026</div></div>
+    </div>
+  </div>
+
+  <div id="cameraControls" class="controls">
+    <div class="row"><button id="flip" class="btn ghost">Trocar câmera</button><button id="galleryBtn" class="btn ghost">Escolher da galeria</button></div>
+    <button id="capture" class="shutter" aria-label="Tirar foto"></button>
+    <div id="cameraStatus" class="status">Permitindo a câmera, a moldura aparecerá automaticamente.</div>
+  </div>
+
+  <div id="previewControls" class="controls hidden">
+    <div class="panel">
+      <input id="guestName" type="text" maxlength="80" placeholder="Seu nome (opcional)"/>
+      <div style="height:10px"></div>
+      <label><input id="consent" type="checkbox"/> Concordo em enviar esta foto aos noivos. Ela não ficará visível para outros convidados.</label>
+    </div>
+    <div class="row"><button id="retake" class="btn secondary">Refazer foto</button><button id="send" class="btn primary">Enviar aos noivos</button></div>
+    <div id="sendStatus" class="status"></div>
+  </div>
+
+  <div id="doneControls" class="controls hidden">
+    <button id="save" class="btn primary">Salvar no meu celular</button>
+    <button id="newPhoto" class="btn secondary">Tirar outra foto</button>
+    <div class="status success">Foto enviada com sucesso ♡</div>
+  </div>
+  <input id="fileInput" type="file" accept="image/*" capture="environment" class="hidden"/>
+</div>
+
+<div id="admin" class="app hidden">
+  <div class="adminCard">
+    <h2 style="font-family:Georgia,serif;margin-top:0">Galeria dos noivos</h2>
+    <div id="loginBox">
+      <input id="adminPass" type="password" placeholder="Senha do painel"/>
+      <div style="height:10px"></div>
+      <button id="adminLogin" class="btn primary" style="width:100%">Entrar</button>
+      <div id="adminStatus" class="status" style="color:#6d4b88"></div>
+    </div>
+    <div id="galleryBox" class="hidden">
+      <div class="row" style="margin-bottom:14px"><button id="refresh" class="btn secondary">Atualizar</button><button id="downloadAll" class="btn primary">Baixar todas</button></div>
+      <div id="gallery" class="grid"></div>
+    </div>
+  </div>
+</div>
+
+<canvas id="canvas" width="1080" height="1920" class="hidden"></canvas>
+
+<script>
+const endpoint = 'https://gxsqgezfiuxxhpeaepem.supabase.co/functions/v1/wedding-app';
+const guest = document.getElementById('guest'), admin = document.getElementById('admin');
+if(new URLSearchParams(location.search).has('admin')){ guest.classList.add('hidden'); admin.classList.remove('hidden'); }
+
+const video=document.getElementById('video'), preview=document.getElementById('photoPreview'), canvas=document.getElementById('canvas'), ctx=canvas.getContext('2d');
+const cameraControls=document.getElementById('cameraControls'), previewControls=document.getElementById('previewControls'), doneControls=document.getElementById('doneControls');
+const cameraStatus=document.getElementById('cameraStatus'), sendStatus=document.getElementById('sendStatus');
+let stream=null, facing='environment', finalData=null, mirrored=false;
+
+function coverDraw(img, mirror=false){
+  const W=1080,H=1920, sw=img.videoWidth||img.naturalWidth, sh=img.videoHeight||img.naturalHeight;
+  const scale=Math.max(W/sw,H/sh), dw=sw*scale, dh=sh*scale, dx=(W-dw)/2, dy=(H-dh)/2;
+  ctx.save(); if(mirror){ctx.translate(W,0);ctx.scale(-1,1);ctx.drawImage(img,-dx-dw,dy,dw,dh);} else ctx.drawImage(img,dx,dy,dw,dh); ctx.restore();
+}
+function drawFrame(){
+  const W=1080,H=1920;
+  ctx.save();ctx.textAlign='center';ctx.fillStyle='#fff';ctx.shadowColor='rgba(0,0,0,.55)';ctx.shadowBlur=10;
+  ctx.font='34px Georgia';ctx.fillText('E | J',W/2,140);
+  ctx.font='italic 42px Georgia';ctx.fillText('Eternize o nosso grande dia',W/2,255);ctx.fillText('através do seu olhar ♡',W/2,310);
+  ctx.font='46px Georgia';ctx.fillText('Emanuelle Thaíza & João Vitor',W/2,H-165);
+  ctx.font='24px Arial';ctx.fillText('10.10.2026',W/2,H-115);
+  ctx.shadowBlur=0;
+  function branch(x,y,flip){ctx.save();ctx.translate(x,y);if(flip){ctx.rotate(Math.PI);ctx.translate(-120,-120)}ctx.strokeStyle='#eee3f7';ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(0,115);ctx.bezierCurveTo(45,80,55,45,68,0);ctx.stroke();ctx.fillStyle='#c6a4e7';[[56,14],[50,37],[44,61],[67,46],[61,71],[55,95]].forEach(([a,b])=>{ctx.beginPath();ctx.ellipse(a,b,12,23,-.25,0,Math.PI*2);ctx.fill()});ctx.fillStyle='#fff';[[18,92],[36,82],[26,67]].forEach(([a,b])=>{ctx.beginPath();ctx.arc(a,b,16,0,Math.PI*2);ctx.fill()});ctx.restore();}
+  branch(15,15,false);branch(W-135,H-135,true);ctx.restore();
+}
+async function startCamera(){
+  if(location.search.includes('admin')) return;
+  try{
+    if(stream) stream.getTracks().forEach(t=>t.stop());
+    stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:facing},aspectRatio:{ideal:9/16}},audio:false});
+    video.srcObject=stream; mirrored=facing==='user'; video.classList.toggle('mirror',mirrored); cameraStatus.textContent='Pronto para fotografar.';
+  }catch(e){cameraStatus.textContent='Não foi possível abrir a câmera. Você pode escolher uma foto da galeria.'}
+}
+document.getElementById('flip').onclick=()=>{facing=facing==='environment'?'user':'environment';startCamera()};
+document.getElementById('galleryBtn').onclick=()=>document.getElementById('fileInput').click();
+document.getElementById('capture').onclick=()=>{ if(!video.videoWidth){cameraStatus.textContent='A câmera ainda não está pronta.';return;} coverDraw(video,mirrored);drawFrame();finalData=canvas.toDataURL('image/jpeg',.92);showPreview(); };
+function showPreview(){preview.src=finalData;preview.classList.remove('hidden');video.classList.add('hidden');cameraControls.classList.add('hidden');previewControls.classList.remove('hidden')}
+function backToCamera(){preview.classList.add('hidden');video.classList.remove('hidden');previewControls.classList.add('hidden');doneControls.classList.add('hidden');cameraControls.classList.remove('hidden');finalData=null;document.getElementById('consent').checked=false;sendStatus.textContent=''}
+document.getElementById('retake').onclick=backToCamera;document.getElementById('newPhoto').onclick=backToCamera;
+document.getElementById('fileInput').onchange=e=>{const f=e.target.files[0];if(!f)return;const img=new Image();img.onload=()=>{coverDraw(img,false);drawFrame();finalData=canvas.toDataURL('image/jpeg',.92);showPreview()};img.src=URL.createObjectURL(f)};
+document.getElementById('send').onclick=async()=>{
+ if(!finalData)return;if(!document.getElementById('consent').checked){sendStatus.textContent='Marque o consentimento antes de enviar.';return}
+ const btn=document.getElementById('send');btn.disabled=true;sendStatus.textContent='Enviando…';
+ try{const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'upload',image:finalData,guest_name:document.getElementById('guestName').value.trim()})});const j=await r.json();if(!r.ok)throw new Error(j.error||'Falha no envio');previewControls.classList.add('hidden');doneControls.classList.remove('hidden')}
+ catch(e){sendStatus.textContent='Não foi possível enviar. Tente novamente.'}finally{btn.disabled=false}
+};
+document.getElementById('save').onclick=()=>{if(!finalData)return;const a=document.createElement('a');a.href=finalData;a.download='EJ-10-10-2026.jpg';a.click()};
+
+async function adminList(){
+ const pass=document.getElementById('adminPass').value;const st=document.getElementById('adminStatus');st.textContent='Carregando…';
+ const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'admin-list',password:pass})});const j=await r.json();
+ if(!r.ok){st.textContent='Senha incorreta.';return}
+ st.textContent='';document.getElementById('loginBox').classList.add('hidden');document.getElementById('galleryBox').classList.remove('hidden');
+ const g=document.getElementById('gallery');g.innerHTML='';window.__photos=j.photos||[];
+ for(const p of window.__photos){const d=document.createElement('div');d.className='tile';d.innerHTML='<a href="'+p.url+'" target="_blank"><img src="'+p.url+'"></a><div><b>'+(p.guest_name||'Convidado(a)')+'</b></div><div>'+new Date(p.created_at).toLocaleString('pt-BR')+'</div><a href="'+p.url+'" download>Baixar</a>';g.appendChild(d)}
+}
+document.getElementById('adminLogin').onclick=adminList;document.getElementById('refresh').onclick=adminList;
+document.getElementById('downloadAll').onclick=async()=>{for(const p of (window.__photos||[])){const a=document.createElement('a');a.href=p.url;a.download='foto-casamento.jpg';document.body.appendChild(a);a.click();a.remove();await new Promise(r=>setTimeout(r,350))}};
+startCamera();
+</script>
+</body>
+</html>

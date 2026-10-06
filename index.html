@@ -126,8 +126,8 @@ a{color:#6c4a90}
       <input id="adminPass" type="password" placeholder="Senha do painel"/>
       <div style="height:10px"></div>
       <button id="adminLogin" class="btn primary" style="width:100%">Entrar</button>
-      <div id="adminStatus" class="status" style="color:#6d4b88"></div>
     </div>
+    <div id="adminStatus" class="status" style="color:#6d4b88" role="status" aria-live="polite"></div>
     <div id="galleryBox" class="hidden">
       <div class="row" style="margin-bottom:14px"><button id="refresh" class="btn secondary">Atualizar</button><button id="downloadAll" class="btn primary">Baixar todas</button></div>
       <div id="gallery" class="grid"></div>
@@ -136,7 +136,7 @@ a{color:#6c4a90}
 </div>
 
 <canvas id="canvas" width="1080" height="1920" class="hidden"></canvas>
-<div class="version">v27-moldura-opcional</div>
+<div class="version">v28-admin-connection</div>
 
 <script>
 const endpoint='https://gxsqgezfiuxxhpeaepem.supabase.co/functions/v1/wedding-app';
@@ -305,14 +305,23 @@ async function deletePhoto(id,button){
 async function adminList(){
   const pass=document.getElementById('adminPass').value;
   const st=document.getElementById('adminStatus');
+  if(!pass){st.textContent='Digite a senha do painel.';return}
+  const loginButton=document.getElementById('adminLogin');
+  const refreshButton=document.getElementById('refresh');
+  loginButton.disabled=true;refreshButton.disabled=true;
+  const controller=new AbortController();
+  const timeout=setTimeout(()=>controller.abort(),20000);
   st.textContent='Carregando…';
+  try{
   const r=await fetch(endpoint,{
+    signal:controller.signal,
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({action:'admin-list',password:pass})
   });
+  if(r.status===401||r.status===403){st.textContent='Senha incorreta.';return}
+  if(!r.ok)throw new Error('Servidor indisponível');
   const j=await r.json();
-  if(!r.ok){st.textContent='Senha incorreta.';return}
   st.textContent='';
   document.getElementById('loginBox').classList.add('hidden');
   document.getElementById('galleryBox').classList.remove('hidden');
@@ -364,6 +373,15 @@ async function adminList(){
     actions.appendChild(del);
     d.appendChild(actions);
     g.appendChild(d);
+  }
+  if(!window.__photos.length)st.textContent='Nenhuma foto enviada ainda.';
+  }catch(error){
+    st.textContent=error.name==='AbortError'
+      ?'O servidor demorou para responder. Tente entrar novamente em alguns instantes.'
+      :'Não foi possível conectar à galeria. Tente novamente em alguns instantes.';
+  }finally{
+    clearTimeout(timeout);
+    loginButton.disabled=false;refreshButton.disabled=false;
   }
 }
 adminLogin.onclick=adminList;refresh.onclick=adminList;

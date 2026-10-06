@@ -85,10 +85,18 @@ a{color:#6c4a90}
 />
   </div>
 
+  <fieldset id="frameChoice" class="controls" style="border:0;margin:0;padding:12px 2px 0">
+    <legend style="font-size:14px;padding-top:12px">Como você prefere a foto?</legend>
+    <div class="row">
+      <label class="btn ghost"><input type="radio" name="frame" value="yes" checked/> Com moldura 💜</label>
+      <label class="btn ghost"><input type="radio" name="frame" value="no"/> Sem moldura</label>
+    </div>
+  </fieldset>
+
   <div id="cameraControls" class="controls">
     <label class="fileLabel primary" for="cameraInput">Abrir câmera do celular</label>
     <label class="fileLabel ghost" for="galleryInput">Escolher foto da galeria</label>
-    <div class="status">A câmera do celular preserva a qualidade; o site aplica a moldura depois.</div>
+    <div class="status">A câmera do celular preserva a qualidade; você escolhe se quer usar a moldura.</div>
   </div>
 
   <div id="previewControls" class="controls hidden">
@@ -128,7 +136,7 @@ a{color:#6c4a90}
 </div>
 
 <canvas id="canvas" width="1080" height="1920" class="hidden"></canvas>
-<div class="version">v26-admin-download-delete</div>
+<div class="version">v27-moldura-opcional</div>
 
 <script>
 const endpoint='https://gxsqgezfiuxxhpeaepem.supabase.co/functions/v1/wedding-app';
@@ -138,7 +146,9 @@ if(new URLSearchParams(location.search).has('admin')){guest.classList.add('hidde
 const preview=document.getElementById('photoPreview'),placeholder=document.getElementById('placeholder'),frameOverlay=document.getElementById('frameOverlay');
 const canvas=document.getElementById('canvas'),ctx=canvas.getContext('2d');
 const cameraControls=document.getElementById('cameraControls'),previewControls=document.getElementById('previewControls'),doneControls=document.getElementById('doneControls'),sendStatus=document.getElementById('sendStatus');
-let finalData=null;
+let finalData=null,originalPhoto=null,renderVersion=0,processing=false;
+const frameChoice=document.getElementById('frameChoice');
+const wantsFrame=()=>document.querySelector('input[name="frame"]:checked').value==='yes';
 
 function drawPhoto9x16(img){
   const W=1080,H=1920,sw=img.naturalWidth||img.width,sh=img.naturalHeight||img.height;
@@ -158,49 +168,51 @@ function loadImage(src){
     img.src = src;
   });
 }
-async function processFile(file){
-  if(!file) return;
-
-  const photoUrl = URL.createObjectURL(file);
-
-  try {
-    const [photo, frame] = await Promise.all([
-      loadImage(photoUrl),
-      loadImage(FRAME_SRC)
-    ]);
-
-    // Primeiro coloca a foto exatamente no canvas 9:16
-    drawPhoto9x16(photo);
-
-    // Depois aplica EXATAMENTE a PNG escolhida
-    ctx.drawImage(frame, 0, 0, 1080, 1920);
-
-    // Cria a foto final pronta para Story
-    finalData = canvas.toDataURL('image/jpeg', 0.97);
-
-    preview.src = finalData;
+async function renderPhoto(){
+  const version=++renderVersion;
+  const useFrame=wantsFrame();
+  frameOverlay.classList.toggle('hidden',!!originalPhoto||!useFrame);
+  if(!originalPhoto)return;
+  processing=true;
+  send.disabled=true;
+  finalData=null;
+  try{
+    const frame=useFrame?await loadImage(FRAME_SRC):null;
+    if(version!==renderVersion)return;
+    drawPhoto9x16(originalPhoto);
+    if(frame)ctx.drawImage(frame,0,0,1080,1920);
+    finalData=canvas.toDataURL('image/jpeg',0.97);
+    preview.src=finalData;
     preview.classList.remove('hidden');
-
     placeholder.classList.add('hidden');
-
-    // A moldura já está incorporada na foto.
-    // Escondemos a camada HTML para não duplicar.
     frameOverlay.classList.add('hidden');
-
     cameraControls.classList.add('hidden');
     previewControls.classList.remove('hidden');
-
-  } catch(error) {
+    sendStatus.textContent='';
+  }catch(error){
+    if(version!==renderVersion)return;
     console.error(error);
-
-    alert(
-      'Não foi possível aplicar a moldura. Confira se moldura-casamento.png está no repositório.'
-    );
-
-  } finally {
-    URL.revokeObjectURL(photoUrl);
+    preview.classList.add('hidden');
+    placeholder.classList.remove('hidden');
+    sendStatus.textContent='Não foi possível preparar a foto. Tente novamente ou escolha sem moldura.';
+  }finally{
+    if(version===renderVersion){processing=false;send.disabled=false}
   }
 }
+async function processFile(file){
+  if(!file)return;
+  const photoUrl=URL.createObjectURL(file);
+  try{
+    originalPhoto=await loadImage(photoUrl);
+    await renderPhoto();
+  }catch(error){
+    console.error(error);
+    alert('Não foi possível abrir esta foto. Escolha outra imagem.');
+  }finally{URL.revokeObjectURL(photoUrl)}
+}
+document.querySelectorAll('input[name="frame"]').forEach(input=>{
+  input.addEventListener('change',()=>renderPhoto());
+});
 
 const cameraInput=document.getElementById('cameraInput');
 const galleryInput=document.getElementById('galleryInput');
@@ -219,12 +231,18 @@ function reset(){
   preview.removeAttribute('src');
 
   placeholder.classList.remove('hidden');
-  frameOverlay.classList.remove('hidden');
+  frameOverlay.classList.toggle('hidden',!wantsFrame());
+  frameChoice.classList.remove('hidden');
+  frameChoice.querySelectorAll('input').forEach(input=>input.disabled=false);
 
   previewControls.classList.add('hidden');
   doneControls.classList.add('hidden');
   cameraControls.classList.remove('hidden');
 
+  ++renderVersion;
+  originalPhoto=null;
+  processing=false;
+  send.disabled=false;
   finalData = null;
   consent.checked = false;
   sendStatus.textContent = '';
@@ -232,15 +250,15 @@ function reset(){
 retake.onclick=reset;newPhoto.onclick=reset;
 
 send.onclick=async()=>{
-  if(!finalData)return;
+  if(!finalData||processing)return;
   if(!consent.checked){sendStatus.textContent='Marque o consentimento antes de enviar.';return}
-  send.disabled=true;sendStatus.textContent='Enviando…';
+  send.disabled=true;frameChoice.querySelectorAll('input').forEach(input=>input.disabled=true);sendStatus.textContent='Enviando…';
   try{
     const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'upload',image:finalData,guest_name:guestName.value.trim()})});
     const j=await r.json();if(!r.ok)throw new Error(j.error||'Falha no envio');
-    previewControls.classList.add('hidden');doneControls.classList.remove('hidden');
+    previewControls.classList.add('hidden');doneControls.classList.remove('hidden');frameChoice.classList.add('hidden');
   }catch(e){sendStatus.textContent='Não foi possível enviar. Tente novamente.'}
-  finally{send.disabled=false}
+  finally{send.disabled=false;frameChoice.querySelectorAll('input').forEach(input=>input.disabled=false)}
 };
 save.onclick=()=>{if(!finalData)return;const a=document.createElement('a');a.href=finalData;a.download='EJ-Story-10-10-2026.jpg';document.body.appendChild(a);a.click();a.remove()};
 
